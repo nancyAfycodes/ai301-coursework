@@ -36,4 +36,5 @@ you want to avoid. The skill uses this only to RANK the issues your
 rubric accepts, never to change a verdict: fit cannot rescue an issue
 your rubric rejects, and cannot sink one it accepts. -->
 
-(Write a few sentences here.)
+
+I'm comfortable with Python, but not necessarily JavaScrip, however, I'm willing to work in JavaScript as a way to improve upon my skills and coding ability in JavaScript. I want to get better at debugging and working with larger codebases. I'm avoiding issues that'll require in-depth knowledge of unfamiliar programming languages.
