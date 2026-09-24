@@ -6,7 +6,7 @@
 |---|---|---|---|
 | Repo is active | Last 5 commits on default branch (in repo-facts block) | A commit within the last 60 days | required |
 | Manageable scope | Issue body and description | Issue has a description of the task, regardless of complexity level | required |
-| Not already claimed | Comments in issue thread | No active contributor has explicitly claimed or is actively working on it | required |
+| Not already claimed | Comments in issue thread | No other contributor has claimed the issue or is actively working on it | required |
 
 ## Verdict rule
 
