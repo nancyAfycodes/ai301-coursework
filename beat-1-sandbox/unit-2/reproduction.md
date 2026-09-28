@@ -1,71 +1,51 @@
-# Unit 2 — Claim and Reproduce
+# Unit 2 — Reproduction and Claim
 
-Path: `beat-1-sandbox/unit-2/reproduction.md`
+## Claim Comment
 
-Record of your claim and reproduction on the issue you chose in Unit 1, and of the
-evaluation runs that produced `eval-run.txt`. This file is graded at the path above; a copy
-kept anywhere else in the repository is not read.
+**Link:** https://github.com/codepath/pathreview-ai301-fa26-s3/issues/71#issuecomment-5858619495
 
-Complete every labelled field below. Each is graded on its own; content placed under the wrong
-label is not graded.
+**Text:**
+I'm claiming this issue and have already reproduced the bug.
 
----
+**Issue:** Issue #71 — The heading hierarchy test fixture has an 8-space indentation 
+that's being parsed as a code block instead of test content, causing the test to fail.
 
-## Your identity upstream
+**Repo status:** The repo is actively maintained — last commit was on 2026-09-16, 11 days ago. 
+There are no active claims or linked PRs on this issue.
 
-**GitHub username**
+**Reproduction:** Successfully reproduced the bug by running the test with `--runxfail`. 
+The 8-space indentation breaks Markdown parsing, causing heading extraction to return an 
+empty list.
 
-[Your GitHub username, exactly as it appears on your profile — no `@`, no profile URL. Your
-comments upstream are identified by this name.]
-
----
-
-## Posted upstream
-
-**Claim comment**
-
-[Link to the comment where you claimed the issue. Use the comment's own permalink, not the
-issue page on its own. **Then paste the text of that comment underneath the link** — the
-pasted text is what this field is graded on, so copy across what you actually posted.]
-
-**Reproduction comment**
-
-[Link to the comment where you posted your reproduction. It must record the environment
-(OS, relevant versions, code state), steps a stranger could follow, and what you observed.
-**Then paste the text of that comment underneath the link** — the pasted text is what this
-field is graded on, so copy across what you actually posted.]
-
-## Eval iterations
-
-Answer all four sections. Quote source text directly; paraphrase does not satisfy these
-fields.
-
-**Run history**
-
-[The agreement score of each run you did, in order. A single run is a complete answer if
-only one run occurred. **The last score in your list must match the agreement line in the
-`eval-run.txt` you committed** — that file is the record of your final run.]
-
-**Package analysis**
-
-[Pick one scored package (`pkg-01` through `pkg-20` — the four `calib-` packages are never
-scored). Name it by id, say what your rubric decided and what the gold label said, and
-explain why your rubric read it that way.]
-
-**Check rationale**
-
-[Quote one check from the `rubric.md` you uploaded to `tools/repro-check/`, exactly as it reads now.
-Then say why it reads that way — what you revised to get there, or what you rejected in
-favour of it.]
-
-**Trade-offs**
-
-[Every check gives something up. Any one of these is a complete answer: a package whose
-result it changes, a canary you re-ran with `--only`, a case you accept it will miss, or a
-stated reason nothing changed elsewhere. "Nothing changed, and here is how I know" earns
-the point in full when the reason follows.]
+**Next:** I will fix the indentation in the test fixture and remove the @pytest.mark.xfail 
+marker (manifest H-04).
 
 ---
 
-Related paths: `eval-run.txt` in this directory; your skill's files in
-`tools/repro-check/`.
+## Reproduction Comment
+
+**Link:** https://github.com/codepath/pathreview-ai301-fa26-s3/issues/71#issuecomment-5860714611
+
+**Text:**
+[Paste your entire repro-report content here]
+
+---
+
+## Eval Iterations
+
+**Run history:**
+- Run 1: 12/20 (original rubric)
+- Run 2: 14/20 (with encoding fix)
+- Run 3: 15/20 (consistent with encoding fix)
+
+**Issue analysis:**
+
+pkg-16 (wrong-target): My rubric decided accepted it, even though the gold label was to reject. Reason being that the package showed a concrete error in the output section ("Behavior shown" check passed). However, the error was unrelated to the fixture indentation issue. The rubric's "Behavior matches issue" check was too loose; it only required "a concrete error," not the specific indentation-caused error that issue #71 illustrates.
+
+**Check rationale:**
+
+"Behavior shown — Output shows the indent-as-code-block parsing problem: a fixture with eight-space indentation is parsed as a code block, causing the heading hierarchy test to fail". Therefore, I wrote this check to be very specific to issue #71 because distinguishing between "any error in output", and "the specific 8-space indent error" is important in reproducing the issue as well as its related fix.
+
+**Trade-offs:**
+
+The specificity of "Behavior shown" means some legitimate reproductions that show related but slightly different indent-parsing errors may be rejected. For instance, a report showing 8-space indent breaking a different parser (not heading extraction) would fail. Therefore, I'd like to add a secondary check: "Indent-related parsing failure" (preferred weight) to  account for variations without having to reject the issue.
