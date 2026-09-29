@@ -17,9 +17,8 @@ Where it lives: repo-facts block (GitHub API: pushed_at timestamp)
 Where it lives: The repro report's "Reproduction Steps" section, numbered and sequential.
 
 What good looks like: A stranger can follow the steps without reading the issue description. 
-Each step is a concrete action: "clone the repo", "install dependencies", "run pytest tests/test_fixture.py", 
-with the exact command shown. For #71, steps should show how to navigate to the fixture file 
-and run the specific test that fails.
+Each step is a concrete action with exact commands shown. Steps should clearly show how to 
+trigger the issue that's being reproduced.
 
 ## Behavior shown
 
