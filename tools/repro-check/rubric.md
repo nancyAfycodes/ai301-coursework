@@ -4,7 +4,7 @@
 
 | Check | Evidence | Pass condition | Weight |
 |---|---|---|---|
-| Repo is active | Claim comment and repro report | Repo's last commit is recent (within 60 days) | required |
+| Repo is active | repo-facts block | Repo's last commit is recent (within 60 days) | required |
 | Environment recorded | Repro report's setup section | Environment details are present (Python version OR test framework OR system info) | required |
 | Steps are complete | Repro report's steps section | Steps are provided and describe how to trigger the issue | required |
 | Behavior shown | Repro report's output section | Output shows a concrete error or problem with the reported issue; not a different error type | required |
