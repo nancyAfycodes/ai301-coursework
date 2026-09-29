@@ -9,6 +9,9 @@ What good looks like: The report names the exact Python version used, the test f
 (pytest, unittest, etc.), and identifies the test file path. For issue #71, it should 
 mention the fixture file and the test that reads it.
 
+## Repo is active
+Where it lives: repo-facts block (GitHub API: pushed_at timestamp)
+
 ## Steps
 
 Where it lives: The repro report's "Reproduction Steps" section, numbered and sequential.
