@@ -5,9 +5,8 @@
 Where it lives: The repro report's "Environment" or "Setup" section, listing Python version, 
 test framework version, and which files are involved in the test.
 
-What good looks like: A stranger can follow the steps without reading the issue description. 
-Each step is a concrete action with exact commands shown. Steps should clearly show how to 
-trigger the issue that's being reproduced.
+What good looks like: The report names the exact Python version, test framework version, 
+and identifies the test file path. All three provide context for reproducing the issue.
 
 ## Repo is active
 Where it lives: repo-facts block (GitHub API: pushed_at timestamp)
@@ -24,9 +23,9 @@ trigger the issue that's being reproduced.
 
 Where it lives: The repro report's "Output" or "Error" section, with command output or error messages pasted verbatim.
 
-What good looks like: A stranger can follow the steps without reading the issue description. 
-Each step is a concrete action with exact commands shown. Steps should clearly show how to 
-trigger the issue that's being reproduced.
+What good looks like: The artifact (error message, test output, assertion failure) is pasted 
+verbatim and directly demonstrates the issue being reproduced. The error is concrete and 
+verifiable, not speculative.
 
 ## Honesty
 
