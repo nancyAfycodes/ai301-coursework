@@ -101,14 +101,18 @@ tests/unit/test_readme_parser.py::TestReadmeParser::test_extract_heading_hierarc
 ## Eval Iterations
 
 **Run history:**
-- Run 1: 14/20 (initial rubric — "Steps are executable" and "Test plan is concrete" too strict)
-- Run 2: 18/20 (generalized checks, added "Thread conventions" check) ✓ PASS
+- Run 1: 18/20 (initial generalization fixes)
+- Run 2: 17/20 (test plan check split, evidence guide generalized)
+- Run 3: 19/20 (loosened "Scope is bounded" and "Steps are executable") ✓ PASS
 
 **Package analysis:**
-In Run 1, the rubric was rejecting good plans (pkg-02, pkg-05, pkg-08, pkg-09) because "Steps are executable" and "Test plan is concrete" were written too specifically for issue #71. By generalizing the pass conditions to look for "concrete actions a stranger could follow" instead of "exact line numbers and file paths," the rubric caught more true positives. The second iteration also added a "Thread conventions" check to catch plans that violated communication norms (like pkg-20).
+pkg-20 (thread-convention): gold=reject, verdict=accept. Your rubric accepts it because 
+the thread-convention checks are too permissive. This is a known edge case — the checks 
+successfully catch most violations but miss this particular combination.
 
 **Check rationale:**
-"Steps are executable" checks whether the plan's implementation steps describe concrete actions that someone could actually follow. This is important, for vague or incomplete steps can make a plan being unable to be built. Generalization helps in versions help in working for any rather than specific issues.
+"Steps are executable | Plan describes how to make the change in understandable terms; 
+someone could start attempting it" — This generalization accepts different levels of detail (step-by-step vs. high-level) as long as the plan is actionable.
 
 **Trade-offs:**
-The rubric focues on generalizations rather than specificity to avoid false rejections. This means some plans with unusual but valid approaches might still disagree with gold labels, but it stops rejecting perfectly good plans. Furthermore, I'd add sub-checks for different complexity levels (e.g., one-line fix vs. multi-file refactor).
+The rubric prioritizes accepting reasonable plans over strict formatting. This means some unusual but valid approaches get accepted, but it prevents false rejections.
