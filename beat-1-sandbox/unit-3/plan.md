@@ -38,3 +38,11 @@ Expected result: Test passes (no XFAIL, no failures). Output should show:
 
 ## Unknowns & Notes
 - Confirmed: once indentation is removed, both the heading extraction and the assertion checks pass.
+
+## Deviations
+None. The implementation followed the plan exactly:
+- Removed 8-space indentation from fixture lines 141-152
+- Removed @pytest.mark.xfail decorator (lines 134-137)
+- Test now passes with `test_extract_heading_hierarchy PASSED [100%]`
+
+No unexpected issues or changes during implementation.
