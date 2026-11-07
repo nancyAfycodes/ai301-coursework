@@ -8,7 +8,7 @@ Path: `beat-2-contribution/contribution-story.md`
 
 **GitHub Username:** [nancyAfycodes]
 
-**Issue:** https://github.com/earthobservations/wetterdienst/issues/3878
+**Issue:** **Issue:** https://github.com/samcorky/menagerist/issues/294
 
 **Pull Request:** [GitHub PR link, once opened]
 
@@ -43,26 +43,29 @@ The task is clear, the maintainer is responsive, and it's perfect practice for m
 
 ## Why I Chose This Issue
 
-I ran 4 scans with my issue-scout skill to find a real-world issue that matched my profile. 
+I ran 5 scans with my issue-scout skill to find a real-world issue that matched my profile. 
 Scan 1 locked to the classroom repo and surfaced high-comment issues, exposing a scope 
-mismatch — I fixed the queries to expand to GitHub's public repos. Scan 2 found 
+mismatch, I, then, fixed the queries to expand to GitHub's public repos. Scan 2 found 
 rockcarver/frodo-cli#1088 (secret headers leak), a perfect match, but it was completed 
 and merged before I could claim it. Scan 3 revealed that the tier-2 query pointed back 
 to the sandbox, so I dropped it. Scan 4 returned earthobservations/wetterdienst#3878: 
-a settings-duplication bug in an active 456-star multilingual app (gutzbenj is actively 
-triaging today). The issue fits perfectly — TypeScript/Vue work builds my JavaScript 
-skills that I'll like to improve upon, the repository is large and well-maintained, 
-and the maintainer has laid out exact steps to fix it. The scout's verdict was accept, 
-and I'll use this as a first step in contributing to open source. 
+a settings-duplication bug in an active 456-star multilingual app. Scan 5 focused on 
+Python only and returned both #3878 and samcorky/menagerist#294. 
 
-**Claim comment:** https://github.com/earthobservations/wetterdienst/issues/3878#comment-[your-comment-id]
-(Posted 2026-11-07 at 13:32)
+I chose #294 because it's pure Python debugging with a smaller, focused scope—exactly 
+what I need for a first contribution. The issue has clear repro steps and an identified 
+likely cause (lru_cache engine outliving asyncio.run loops), so the path to fix is clear. 
+Both issues was graded as "accept" by my rubric, but #294 is better suited for a first 
+contribution. I'll tackle #3878 (settings refactor, TypeScript/Vue) as a second contribution 
+once #294 is merged, which is a great stretch goal for building JavaScript skills that I'm interested in developing further.
+
+**Claim comment:** https://github.com/samcorky/menagerist/issues/294#issuecomment-6713725471
 
 **Toolkit**
 
-- Tool: issue-scout (4 scans with refined search strategy and rubric)
-- What it produced: Filtered 299+ GitHub issues through Python/JavaScript language matching, bug labels, and comment-count ranking; graded top 5 with rubric checks (repo active, manageable scope, not already claimed)
-- Difficulties: Tier-2 label only exists in classroom repos (sandbox); bot commits can fool "active repo" check; 5-comment cutoff barely filtered anything; Python/JavaScript filters required language:python syntax (not --language flag)
-- What changed: Dropped tier-2 query, fixed language filter syntax, tightened future criteria to check for human maintainers vs. bot-only commits
+- Tool: issue-scout (5 scans with refined search strategy and rubric, plus grading)
+- What it produced: Filtered 296+ Python issues through bug label matching and comment-count ranking; graded top candidates with rubric checks; both finalists passed (menagerist#294 and wetterdienst#3878)
+- Difficulties: Python-only focus eliminated JavaScript options; owner-opened issues risk being fixed by maintainer; comment filter barely worked (all 0 comments); rubric too loose to distinguish beginner-friendly from complex refactors
+- What changed: Removed JavaScript queries for Python focus; decided to grade BEFORE claiming (caught that #3878 scope was too large); deferred #3878 as second contribution for later
 
 ---
