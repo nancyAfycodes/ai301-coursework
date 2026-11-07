@@ -1,282 +1,68 @@
-# Contribution: [Issue Title]
+# Contribution: Explorer settings duplicate app settings, only Explorer's copy used
 
 Path: `beat-2-contribution/contribution-story.md`
 
-This file is Assignment 5, and it is graded at the path above; a copy kept anywhere else in
-the repository is not read. **Keep every section header below under its exact name** — the
-format criteria grade exactly that. Your course repo link is the whole submission: no tool
-files and no evidence uploads are part of Assignment 5.
-
 **Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
-**Issue:** [GitHub issue link]
+
+**Student:** [Nancy Anatuanya]
+
+**GitHub Username:** [nancyAfycodes]
+
+**Issue:** https://github.com/earthobservations/wetterdienst/issues/3878
+
 **Pull Request:** [GitHub PR link, once opened]
-
-One repository, built across units 5 to 8, telling the whole story of your real
-contribution. Fill it as you work, not at the end — the sections below ask for evidence that
-is far easier to write down as it happens than to reconstruct in the last weekend.
-
-Contribution Number stays `[1]` unless you make more than one contribution this term; it
-just numbers them.
 
 ---
 
 ## Toolkit
 
-Every story section below, from Why I Chose This Issue through Pull
-Request, ends with a Toolkit block: which tool did that phase's work
-and how you used it, what it produced, what difficulties or
-shortcomings it presented, and what you changed or would change
-because of them. Together the blocks are the thread the rubric's
-Toolkit points read, and they are the raw material for your unit-9
-portfolio, so keep them current as you work rather than
-reconstructing them later.
+**Unit 5: Issue scout with Python/JavaScript language filtering and real-world search**
 
-A Toolkit block looks like this (copy it into each story section and
-fill it there):
-
-```text
-**Toolkit**
-
-- Tool: [which tool did this phase's work, and how you used it]
-- What it produced: [described in a sentence or a short excerpt]
-- Difficulties: [what fought you or fell short, or "none met"]
-- What changed: [the patch, revision, or workaround, what you would
-  update, or "nothing"]
-```
-
-This section also keeps one short dated entry per week of tool work,
-starting below: what you built or changed that week, what broke, and
-what you changed because of it. The blocks tell the story where it
-happened; these entries are the toolkit's own timeline.
-
-All four entries are graded. Keep every heading below, and fill each
-one in the week it belongs to.
-
-**Unit 5: [one line on the tool work]**
-
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+I built a skill that searches GitHub for open-source issues matching my profile: 
+Python debugging with JavaScript stretching, in larger codebases. Ran 4 scans ( about $4 in total cost), 
+discovering that gh requires language:python in the query string (not --language flags), 
+that course labels like tier-2 point back to the sandbox, and that bot commits can fool 
+the "active repo" check. Each scan refined the strategy: removing repo lock, fixing 
+language filtering, dropping the tier-2 query. Scan 4 found earthobservations/wetterdienst#3878: 
+a real settings-duplication bug in an active 456-star multilingual app (TypeScript/Vue). 
+The task is clear, the maintainer is responsive, and it's perfect practice for me to practice using JavaScript
 
 **Unit 6: [one line on the tool work]**
 
-[2-4 sentences: the voice-guard, the repo-memory file. What broke or
-fell short, and what changed because of it. "Nothing broke" counts when
-it is true - say how you know.]
+[2-4 sentences: fill in Unit 6]
 
 **Unit 7: [one line on the tool work]**
 
-[2-4 sentences: the ship-gate and your gate manifest. What it produced
-on your real branch, what fought you, what changed because of it.]
+[2-4 sentences: fill in Unit 7]
 
 **Unit 8: [one line on the tool work]**
 
-[2-4 sentences: the PR-monitor and your playbook. What it read, what it
-drafted, what you did with the draft.]
+[2-4 sentences: fill in Unit 8]
 
 ---
 
 ## Why I Chose This Issue
 
-[1-2 paragraphs in your own words: how you searched, what your scan
-surfaced, what your scout's verdict said, why this issue fits your
-profile, and what you hope to learn. If your scout's verdict on it
-was reject and you chose it anyway, say so here and say why; choosing
-against your own tool silently is what loses points. Close with an
-honest read of the tool itself: where the scout fell short on a real
-wild search and what you changed or would change, or what convinced
-you it held up. **Record the link to your claim comment in this section too.**
-Not claimed yet? Write `claim pending` and today's date where the link goes,
-and add the link the moment your claim lands.]
+I ran 4 scans with my issue-scout skill to find a real-world issue that matched my profile. 
+Scan 1 locked to the classroom repo and surfaced high-comment issues, exposing a scope 
+mismatch — I fixed the queries to expand to GitHub's public repos. Scan 2 found 
+rockcarver/frodo-cli#1088 (secret headers leak), a perfect match, but it was completed 
+and merged before I could claim it. Scan 3 revealed that the tier-2 query pointed back 
+to the sandbox, so I dropped it. Scan 4 returned earthobservations/wetterdienst#3878: 
+a settings-duplication bug in an active 456-star multilingual app (gutzbenj is actively 
+triaging today). The issue fits perfectly — TypeScript/Vue work builds my JavaScript 
+skills that I'll like to improve upon, the repository is large and well-maintained, 
+and the maintainer has laid out exact steps to fix it. The scout's verdict was accept, 
+and I'll use this as a first step in contributing to open source. 
+
+**Claim comment:** https://github.com/earthobservations/wetterdienst/issues/3878#comment-[your-comment-id]
+(Posted 2026-11-07 at 13:32)
 
 **Toolkit**
 
-- Tool: issue-scout (your scout: your search strategy, your rubric),
-  and how you used it
-- What it produced: [the scan and its verdict on this issue, described]
-- Difficulties: [where it fell short, or "none met" if none did]
-- What changed: [what you patched or would update, or "nothing"]
+- Tool: issue-scout (4 scans with refined search strategy and rubric)
+- What it produced: Filtered 299+ GitHub issues through Python/JavaScript language matching, bug labels, and comment-count ranking; graded top 5 with rubric checks (repo active, manageable scope, not already claimed)
+- Difficulties: Tier-2 label only exists in classroom repos (sandbox); bot commits can fool "active repo" check; 5-comment cutoff barely filtered anything; Python/JavaScript filters required language:python syntax (not --language flag)
+- What changed: Dropped tier-2 query, fixed language filter syntax, tightened future criteria to check for human maintainers vs. bot-only commits
 
 ---
-
-## Understanding the Issue
-
-**Problem Description**
-
-[In your own words, what is broken or missing?]
-
-**Expected Behavior**
-
-[What should happen?]
-
-**Current Behavior**
-
-[What actually happens?]
-
-**Affected Components**
-
-[Which parts of the codebase are involved?]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Reproduction Process
-
-**Environment Setup**
-
-[What a stranger would need to stand this up: your operating system,
-the relevant versions (language, runtime, package manager, the project
-itself), and how you set the project up. Then the challenges you faced
-and how you solved them, or that none came up.]
-
-**Steps to Reproduce**
-
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
-
-**Reproduction Evidence**
-
-- **Commit showing reproduction:** [link to commit in your fork]
-- **Screenshots/logs:** [if applicable]
-- **My findings:** [what you discovered during reproduction; an
-  honest, evidenced cannot-reproduce that led you to re-pick or ask
-  the maintainer belongs here and costs you nothing]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Solution Approach
-
-**Analysis**
-
-[Your analysis of the root cause: what is causing the issue, traced
-to the files and functions involved.]
-
-**Proposed Solution**
-
-[High-level description of your fix approach, and what you are
-deliberately NOT changing.]
-
-**Implementation Plan**
-
-1. [Modify file X to do Y]
-2. [Add or change Z]
-3. [Update tests]
-
-[Record deviations here as they happen: what changed mid-build and
-why. A recorded deviation is honest work; silent drift is not.]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Testing Strategy
-
-[What observable checks prove the fix: your reproduction steps re-run
-against the built change (before and after), and the repo's own test
-suite or checks with the outcome shown. "Tests pass" with nothing
-observable named is not a strategy.]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Implementation Notes
-
-[A running log, added to as you work. Date each entry. What you
-built, decisions you made when you made them, wrong turns included.]
-
-**[Date]**
-
-[Entry]
-
-**[Date]**
-
-[Entry]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Pull Request
-
-**PR Link:** [GitHub PR URL when opened]
-
-**PR Description:** [what the PR says; much of the content above
-adapts into it]
-
-**Maintainer Feedback:**
-
-- [Date]: [feedback received, or "none yet"; silence is a normal
-  state and costs you nothing]
-- [Date]: [how you addressed it]
-
-**Status:** [Awaiting review / Iterating / Merged / Closed. The
-status is a fact you record, never a grade: the PR is graded as
-opened.]
-
-**Toolkit**
-
-- Tool:
-- What it produced:
-- Difficulties:
-- What changed:
-
----
-
-## Learnings and Reflections
-
-**Technical Skills Gained**
-
-[What you learned technically, named concretely.]
-
-**Challenges Overcome**
-
-[What was hard and how you solved it; point at the real events, the
-Toolkit blocks above are full of them.]
-
-**What I'd Do Differently Next Time**
-
-[Reflection on your process.]
-
----
-
-## Resources Used
-
-[What actually helped, not a reading list. List things this story
-already shows you using: the doc you followed to set the environment
-up, the thread that explained the bug, the person who answered you.
-One real entry beats ten plausible ones.]
-
-- [Link to documentation that helped]
-- [Discussion, issue, or post that helped]
