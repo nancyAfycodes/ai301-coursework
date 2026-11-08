@@ -4,7 +4,7 @@ Path: `beat-2-contribution/contribution-story.md`
 
 **Contribution Number:** [1]
 
-**Student:** [Nancy Anatuanya]
+**Student:** [Nancy A]
 
 **GitHub Username:** [nancyAfycodes]
 
@@ -45,3 +45,35 @@ My scout worked, it filtered out claimed issues and caught the difficulty edge, 
 **Claim comment:** https://github.com/code-charity/youtube/issues/4348#issuecomment-6721980800
 
 ---
+
+## Reproduction Process
+
+### Environment Setup
+
+- Browser: Chrome 131.0.6778.86
+- OS: Windows 11
+- Extension version: master at PR #4446 merge (2026-11-04)
+
+### Steps to Reproduce
+
+1. Clone the repository: `git clone https://github.com/code-charity/youtube.git`
+2. Load the extension in Chrome: Go to chrome://extensions → Enable Developer mode → Load unpacked → select repo root
+3. Navigate to YouTube home feed
+4. Find a playlist tile (e.g., "My Mix" or "Podcasts")
+5. Click the block button on a playlist tile
+6. Check the blocklist settings menu to see if the playlist is blocked
+
+### Reproduction Evidence
+
+The blocklist settings menu (menu/skeleton-parts/blocklist.js) displays only two lists: Channels and Videos. There is no "Playlists" option.
+
+When I clicked the block button on a "My Mix" playlist tile, it blocked that single video, not the entire "My Mix" playlist. The next time I refreshed the home feed, other videos from "My Mix" still appeared.
+
+The content script (js&css/web-accessible/www.youtube.com/blocklist.js, line 12) only processes nodes with a video ID: `if (!video) return;`. Mix tiles link to watch?v=...&list=RD..., so the tile is matched by its first video's ID, not the playlist ID. Blocking stores the video, not the list. The storage object structure has `blocklist.channels` and `blocklist.videos`, but no `blocklist.playlists` field to store playlist blocks.
+
+**Toolkit**
+
+- **repro-check:** validated that the claim and repro report meet all five required checks (repo active, environment recorded, steps complete, behavior shown, correct issue)
+- **What it produced:** a reproducible, evidence-backed report showing that playlists cannot currently be blocked
+- **Difficulties:** understanding Mix tile URL structure (watch?v=...&list=RD...) and why the block button affects videos, not playlists
+- **What changed:** added "Observed" section with code-level evidence; corrected file paths and feature categories in claim comment
