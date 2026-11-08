@@ -4,7 +4,7 @@ Path: `beat-2-contribution/contribution-story.md`
 
 **Contribution Number:** [1]
 
-**Student:** []
+**Student:** [Nancy Anatuanya]
 
 **GitHub Username:** [nancyAfycodes]
 
@@ -35,9 +35,15 @@ I built a skill that searches GitHub for issues by profile (Python debugging, la
 ---
 
 ## Why I Chose This Issue
+I ran my issue-scout skill from Unit 5 to find a real-world issue matching my profile. Scan 1 accepted 5 issues, but all were recently posted by repo owners. Grading Batch 1 rejected all 5 picks from the Issue Selection site: they were all claimed. Grading Batch 2 accepted one: code-charity/youtube#4348 (block playlists), which I immediately claimed.
 
+My scout graded it as accept with difficulty ambitious — the feature request leaves scope open (“my mix, podcasts, etc.” and where to hide them?), which means raising those questions with the maintainer early, and asking clarifying questions. The repo is JavaScript (Python preference was my preference), however, I've always wanted to practice and improve my skills in JavaScript, so I'm using this course project as practice.
 
-**Claim comment:** 
+I chose this over waiting for a Python issue because it’s unclaimed, the maintainer is responsive (commits daily), and I have a clear first step: trace how the existing blocklist code works and understand where playlist filtering fits. The issue description is sparse, so asking good questions upfront matters. On closer inspection, I noticed that contributing.md page has details that will help me in completing the project, since it has a link, and it's reflected in my claim comment.
+
+My scout worked, it filtered out claimed issues and caught the difficulty edge, rubric’s original scope check was too strict, rejecting most real-world issues. I patched it in Unit 6 to flag open edges instead of rejecting them. The comment filter never worked (all issues were hours old with 0 comments), so the per-repo limit saved me from five duplicates of the same issue.
+
+**Claim comment:** https://github.com/code-charity/youtube/issues/4348#issuecomment-6721980800
 
 **Toolkit**
 
