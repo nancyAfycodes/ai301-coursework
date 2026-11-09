@@ -77,3 +77,59 @@ The content script (js&css/web-accessible/www.youtube.com/blocklist.js, line 12)
 - **What it produced:** a reproducible, evidence-backed report showing that playlists cannot currently be blocked
 - **Difficulties:** understanding Mix tile URL structure (watch?v=...&list=RD...) and why the block button affects videos, not playlists
 - **What changed:** added "Observed" section with code-level evidence; corrected file paths and feature categories in claim comment
+
+## Understanding the Issue**
+
+**What is the root cause?**
+The blocklist code checks for a video ID as its first step (`if (!video) return;`), then exits if none is found. Playlist tiles don't have video IDs—they're matched by their first video ID (in URLs like `watch?v=...&list=RD...`). This causes the block button to store only the video, not the playlist.
+
+**Where in the code does it happen?**
+In `js&css/web-accessible/www.youtube.com/blocklist.js`, line 12 (`blocklistNode()` function). The storage initialization (`blocklistInit()`, lines 227-235) only creates `{videos: {}, channels: {}}`. The UI (`menu/skeleton-parts/blocklist.js`) renders only two lists.
+
+**Why is this a problem?**
+Users can't block entire playlist types. Clicking the block button on a "My Mix" or "Podcasts" tile blocks that single video, not the playlist. Other videos from the same playlist still appear after refresh.
+
+**What's the scope of the fix?**
+Add a third blocklist type for playlists: detection logic to extract playlist IDs, storage structure, UI menu section, and blocking logic identical to how channels and videos are blocked.
+
+---
+
+## Solution Approach
+
+**Analysis:** The cause spans three files: storage initialization missing `playlists` object, detection logic missing playlist ID extraction (blocked by premature video check), and UI missing playlists list button and storage rendering.
+
+**Proposed Solution:** Add playlist support by:
+1. Initializing `blocklist.playlists = {}` in storage
+2. Extracting playlist ID before the video ID check, allowing nodes with playlists but no videos to proceed
+3. Adding a "Playlists" button and list to the UI (copying the channels/videos pattern)
+4. Adding playlist blocking logic and CSS class (`it-blocklisted-playlist`)
+5. Updating the button handler to detect and block playlists
+6. Updating the mutation observer to track playlist blocks
+7. Adding cleanup code to remove playlist CSS classes on disable
+
+What won't change: The overall architecture, message-passing system, or how videos and channels are handled. This is a pure extension, not a refactor.
+
+**Implementation Plan:**
+- Step 1: Add `playlists: {}` to storage initialization (`blocklistInit()`, line 228)
+- Step 2: Add playlist ID extraction logic before the `if (!video) return;` check (line 12)
+- Step 3: Modify the check to allow nodes with playlists but no videos: `if (!video && !playlist) return;`
+- Step 4: Add playlist blocking check and CSS class after channel check (after line 41)
+- Step 5: Add playlists button to UI (`menu/skeleton-parts/blocklist.js`, after line 237)
+- Step 6: Update button onclick handler to detect playlist blocks (around line 78)
+- Step 7: Update mutation observer to handle playlists (lines 274-304)
+- Step 8: Add playlist cleanup in disable section (after line 269)
+- Step 9: Test blocking on different playlist types (Mixes, Watch Later, saved playlists, auto-generated)
+
+Estimated scope: ~200 lines of code changes across 2 files.
+
+---
+
+## Toolkit
+
+**ship-manifest:** Lists npm install, npm test, npm lint as required checks (no exclusions).
+
+**What it produces:** Pre-PR validation that manifest checks pass and pr-precheck grades the branch as accept.
+
+**Difficulties:** [To fill in after implementation]
+
+**What changes:** [To fill in after running ship-gate]
