@@ -10,7 +10,7 @@ Path: `beat-2-contribution/contribution-story.md`
 
 **Issue:** **Issue:** https://github.com/code-charity/youtube/issues/4348
 
-**Pull Request:** [GitHub PR link, once opened]
+**Pull Request:** [https://github.com/code-charity/youtube/pull/4468]
 
 ---
 
