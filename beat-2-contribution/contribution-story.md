@@ -1,6 +1,6 @@
 # Contribution: Add Playlist Blocking Support to ImprovedTube
 
-**Contribution Number:** 1
+**Contribution Number:** [1]
 
 **Student:** Nancy A
 
@@ -41,6 +41,8 @@ My scout graded it as accept with difficulty ambitious — the feature request l
 I chose this over waiting for a Python issue because it's unclaimed, the maintainer is responsive (commits daily), and I have a clear first step: trace how the existing blocklist code works and understand where playlist filtering fits. The issue description is sparse, so asking good questions upfront matters. On closer inspection, I noticed that contributing.md page has details that will help me in completing the project.
 
 **Claim comment:** https://github.com/code-charity/youtube/issues/4348#issuecomment-6721980800
+
+**Tool:** I used my Unit 5 issue-scout skill to search GitHub for unclaimed issues matching my profile. The scout ranked results by repo activity and author engagement, then graded them against my rubric (repo active, scope feasible, not claimed). After grading 13 candidates across 4 scans, only #4348 passed all checks and was unclaimed, making it the top pick despite being in JavaScript rather than my preferred programming language, Python.
 
 ---
 
@@ -134,6 +136,8 @@ What won't change: The overall architecture, message-passing system, or how vide
 **2026-11-08 23:45:** Updated mutation observer for playlist tracking. Added cleanup code. Created comprehensive test file with 9 test cases.
 
 **2026-11-09 00:15:** All tests pass (238 total, 9 new blocklist tests). Fixed indentation issues. Removed unnecessary commits. Ready for PR.
+
+**2026-11-10 01:25:** Installed PR monitor tool and created playbook with data-driven thresholds. Researched 9 recent merged PRs from code-charity/youtube; found average response time of 3.56 days. Set first-response threshold to 5 days, second-response to 7 days. Monitor drafted "wait note" for current PR (only 1 day old); next check date 2026-11-14.
 
 ---
 
