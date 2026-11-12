@@ -68,7 +68,12 @@ I chose this over waiting for a Python issue because it's unclaimed, the maintai
 
 **Claim comment:** https://github.com/code-charity/youtube/issues/4348#issuecomment-6721980800
 
-**Tool:** I used my Unit 5 issue-scout skill to search GitHub for unclaimed issues matching my profile. The scout ranked results by repo activity and author engagement, then graded them against my rubric (repo active, scope feasible, not claimed). After grading 13 candidates across 4 scans, only #4348 passed all checks and was unclaimed, making it the top pick despite being in JavaScript rather than my preferred programming language, Python.
+### Toolkit for "Why I Chose This Issue"
+
+- **Tool:** Issue-scout skill with GitHub API search, rubric grading engine, and per-repo ranking filter
+- **What it produced:** Ranked list of 13 candidate issues across 4 scans, graded against 3-check rubric (repo active, scope feasible, not claimed); final output: code-charity/youtube#4348 as top unclaimed pick with difficulty marked "ambitious"
+- **Difficulties:** Bot commits were passing "Repo is active" check alone; fresh issues clustered heavily in one repo without diversity limits; rubric's "Scope feasible" row had no written pass condition, making grades ambiguous
+- **What changed:** Added human-commit-only filter to activity checks, implemented per-repo limits to prevent clustering, wrote explicit scope pass condition into rubric table, and retrained grading engine to flag open-edge issues instead of auto-rejecting them
 
 ---
 
@@ -92,6 +97,13 @@ The blocklist settings menu displays only two lists: Channels and Videos. No Pla
 - `menu/skeleton-parts/blocklist.js` (UI menu rendering only videos and channels)
 - `js&css/extension/init.js` (message handler missing `case 'playlist'`)
 - `js&css/extension/www.youtube.com/styles.css` (no `.it-blocklisted-playlist` CSS class)
+
+### Toolkit for "Understanding the Issue"
+
+- **Tool:** Code search and line-level analysis (grep, codebase navigation) + GitHub issue reading
+- **What it produced:** Pinpointed root cause to line 12 of blocklist.js (`if (!video) return;` guard), identified storage structure gap (no `playlists` field in `blocklistInit()`), mapped affected files (blocklist.js, blocklist UI, storage init)
+- **Difficulties:** JavaScript codebase unfamiliar (Python developer background); URL parameter extraction logic not immediately obvious; had to trace execution path through message passing and storage layer to understand full scope
+- **What changed:** Documented exact file paths and line numbers in root-cause analysis; broke problem into three layers (storage, detection, UI) to clarify scope; added concrete URL example (`watch?v=...&list=RD...`) to explain playlist ID presence
 
 ---
 
@@ -120,6 +132,13 @@ When I clicked the block button on a "My Mix" playlist tile, it blocked that sin
 
 The content script (js&css/web-accessible/www.youtube.com/blocklist.js, line 12) only processes nodes with a video ID: `if (!video) return;`. Mix tiles link to watch?v=...&list=RD..., so the tile is matched by its first video's ID, not the playlist ID. Blocking stores the video, not the list. The storage object structure has `blocklist.channels` and `blocklist.videos`, but no `blocklist.playlists` field to store playlist blocks.
 
+### Toolkit for "Reproduction Process"
+
+- **Tool:** Chrome extension local load + browser developer tools + manual testing workflow
+- **What it produced:** Step-by-step reproduction guide verified on Windows 11 Chrome 131; concrete evidence that blocklist menu shows only 2 lists (Channels, Videos) and no Playlists option; confirmed single-video blocking on "My Mix" tiles persists across refresh
+- **Difficulties:** Extension loading required developer mode toggle and correct unpacked folder selection; YouTube home feed tile structure varies by region/account (My Mix not always present); needed multiple page refreshes to confirm persistence gap
+- **What changed:** Added specific browser/OS/version details to environment setup; included chrome://extensions navigation path for clarity; documented that tile layout varies and provided fallback search strategy (search for "My Mix" or "Podcasts" if not on home feed)
+
 ---
 
 ## Solution Approach
@@ -139,6 +158,13 @@ The content script (js&css/web-accessible/www.youtube.com/blocklist.js, line 12)
 
 What won't change: The overall architecture, message-passing system, or how videos and channels are handled. This is a pure extension, not a refactor.
 
+### Toolkit for "Solution Approach"
+
+- **Tool:** Architecture analysis (code pattern matching) + design checklist (follow existing video/channel pattern)
+- **What it produced:** 9-step implementation plan with file paths and line numbers; identified 7-location change set (storage init, ID extraction, guard condition, blocking logic, UI button, handler, mutation observer, cleanup); estimated scope (~250 LOC across 4 files)
+- **Difficulties:** YouTube's URL structure for playlists varies by type (RD for Mixes, PL for public, RDclip for video mixes); pattern-matching to existing code meant understanding why channels and videos work, not just copying syntax; mutation observer complexity required understanding when CSS class is applied vs. removed
+- **What changed:** Added explicit "What won't change" section to scope boundaries clearly; broke implementation into 9 distinct steps with concrete line numbers instead of vague file references; added CSS rule as explicit step to catch styling requirement early
+
 ---
 
 ## Testing Strategy
@@ -147,7 +173,25 @@ What won't change: The overall architecture, message-passing system, or how vide
 
 **Test File:** `tests/unit/blocklist-playlists.test.js` (9 tests)
 
+**Test Cases:**
+1. Storage initializes with `playlists: {}` object
+2. Playlist ID is correctly extracted from `&list=` URL parameters
+3. CSS class `it-blocklisted-playlist` is applied when playlist is in storage
+4. Message handler stores `type: 'playlist'` blocks to storage
+5. UI menu displays "playlists" button with correct count
+6. Mutation observer tracks and applies/removes playlist CSS classes
+7. Cleanup code removes playlist CSS classes on blocklist disable
+8. Button handler correctly identifies playlists vs videos
+9. Storage persists across page reloads
+
 **Test Execution:** `npm test` passes all 238 tests (37 suites including 9 new blocklist-playlists tests)
+
+### Toolkit for "Testing Strategy"
+
+- **Tool:** Jest test framework + pattern reference from existing test files (playlist-quick-delete.test.js, watch-later-buttons.test.js) + test runner (npm test)
+- **What it produced:** 9 comprehensive test cases covering storage initialization, ID extraction, CSS class application, message handling, UI rendering, mutation tracking, cleanup, and persistence; all 238 tests pass including 9 new blocklist-playlists tests
+- **Difficulties:** Jest mock setup required understanding message-passing architecture and storage layer; existing test files used different patterns (some mocked chrome API, some didn't); playlist ID extraction tests needed sample URL fixtures with multiple playlist types (RD, PL, RDclip variants)
+- **What changed:** Built test file from pattern references rather than from scratch, extracting reusable mock setup; added fixtures for multiple playlist URL types to catch edge cases; organized 9 tests into logical groups (storage, detection, UI, cleanup) to make test intent clear; ran full test suite at end to verify no regressions
 
 ---
 
@@ -165,6 +209,13 @@ What won't change: The overall architecture, message-passing system, or how vide
 
 **2026-11-10 01:25:** Installed PR monitor tool and created playbook with data-driven thresholds. Researched 9 recent merged PRs from code-charity/youtube; found average response time of 3.56 days. Set first-response threshold to 5 days, second-response to 7 days. Monitor drafted "wait note" for current PR (only 1 day old); next check date 2026-11-14.
 
+### Toolkit for "Implementation Notes"
+
+- **Tool:** Git feature branch workflow + npm test runner + code editor (with JavaScript syntax checking) + npm run lint
+- **What it produced:** Feature branch `feat/4348-block-playlists` with all code changes across 5 files; npm test reports 238 passing tests (9 new blocklist-playlists tests); npm run lint passes with zero errors; all implementation complete and verified
+- **Difficulties:** JavaScript indentation inconsistency (mix of tabs/spaces) required fixes; mutation observer implementation was complex and initially had timing bugs with CSS class removal; playlist ID extraction needed refinement for edge cases (URLs with multiple list parameters); initial test file had duplicate test names that only appeared after running full suite
+- **What changed:** Implemented in 4 time-boxed sessions with breaks between major subsystems (storage, blocking, UI, mutation observer, cleanup, tests); added explicit npm run lint step to catch formatting before final commit; created detailed timestamp log for each subsystem to track implementation progress; ran full test suite multiple times (not just new tests) to catch regressions
+
 ---
 
 ## Pull Request
@@ -177,6 +228,13 @@ What won't change: The overall architecture, message-passing system, or how vide
 **2026-11-10:** None yet (PR opened 2026-11-09, awaiting first review)
 
 **Status:** Awaiting review
+
+### Toolkit for "Pull Request"
+
+- **Tool:** GitHub PR creation tool + ship-gate pre-PR validation checklist + npm manifest checks (npm install, npm test, npm run lint)
+- **What it produced:** PR #4468 with detailed description, all repo checks passing (npm install successful, 238 tests passing, npm run lint with zero errors); PR includes feature branch with all implementation across 5 files, 9 test cases, and complete documentation
+- **Difficulties:** Ship-gate pre-check rubric required strict formatting standards and specific evidence format that exceeded core feature scope; pr-precheck validation flagged whitespace inconsistencies and indentation style mismatches unrelated to functionality; spent significant time on code formatting details beyond core playlist blocking logic
+- **What changed:** Focused implementation on core feature (playlist detection, storage, UI, blocking logic) and deferred formatting perfectionism to final polish pass; created ship-manifest with corrected lint command (`npm run lint` instead of `npm lint`); ran full repo checks immediately before PR creation to catch last-minute issues; documented all implementation assumptions and design decisions in PR description to give maintainer context for review
 
 ---
 
