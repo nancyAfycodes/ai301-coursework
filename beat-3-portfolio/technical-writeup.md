@@ -2,7 +2,7 @@
 
 ## Overview
 
-Built a four-tool framework (issue-select, repro-check, plan-check, pr-precheck) to guide myself through the full open source contribution lifecycle: selecting a good first issue, reproducing a bug, planning a fix, and evaluating the final pull request. The problem I solved for myself: contributing to open source requires structured thinking at every phase; without standards, it's easy to miss critical details or submit work unprepared. I designed rubrics, procedures, and evidence guides for each phase, iterating based on feedback—replacing fuzzy criteria with observable facts. The outcome: shipped a real PR (#86) that fixed a parsing bug in a live repository, and achieved perfect agreement (20/20) when my evaluation framework graded contributions.
+Built a four-tool framework (issue-select, repro-check, plan-check, pr-precheck) to guide myself through the full open source contribution lifecycle: selecting a good first issue, reproducing a bug, planning a fix, and evaluating the final pull request. The problem I solved for myself: contributing to open source requires structured thinking at every phase; without standards, it's easy to miss critical details or submit work unprepared. I designed rubrics, procedures, and evidence guides for each phase, iterating based on feedback—replacing fuzzy criteria with observable facts. The outcome: shipped a real [PR #86](https://github.com/codepath/pathreview-ai301-fa26-s3/pull/86) that fixed a parsing bug in a live repository, and achieved perfect agreement (20/20) when my evaluation framework graded contributions.
 
 ## What happened
 
