@@ -2,7 +2,7 @@
 
 ## Overview
 
-Built a four-tool framework (issue-select, repro-check, plan-check, pr-precheck) to guide myself through the full open source contribution lifecycle: selecting a good first issue, reproducing a bug, planning a fix, and evaluating the final pull request. The problem I solved for myself: contributing to open source requires structured thinking at every phase; without standards, it's easy to miss critical details or submit work unprepared. I designed rubrics, procedures, and evidence guides for each phase, iterating based on feedback—replacing fuzzy criteria with observable facts. The outcome: shipped a real [PR #86](https://github.com/codepath/pathreview-ai301-fa26-s3/pull/86) that fixed a parsing bug in a live repository, and achieved perfect agreement (20/20) when my evaluation framework graded contributions.
+Built a four-tool framework (issue-select, repro-check, plan-check, pr-precheck) to guide myself through the full open source contribution lifecycle: selecting a good first issue, reproducing a bug, planning a fix, and final pull request evaluation. The problem I solved for myself: contributing to open source requires structured thinking at every phase; without standards, it's easy to miss critical details or submit work unprepared. I designed rubrics, procedures, and evidence guides for each phase, iterating based on feedback—replacing fuzzy criteria with observable facts. The outcome: shipped a real [PR #86](https://github.com/codepath/pathreview-ai301-fa26-s3/pull/86) that fixed a test fixture indentation issue that broke the heading hierarchy test, and achieved perfect agreement (20/20) when my evaluation framework graded contributions.
 
 ## What happened
 
@@ -53,7 +53,7 @@ The parser returned an empty list because the fixture's 8-space indentation made
 | Test plan is concrete | Plan's testing/verification section | Plan specifies the exact command to run and what success looks like (e.g., "test passes with output X"), not vague ("it works") | required |
 ```
 
-This was too strict. In Unit 4 eval runs, it rejected good PRs because different projects verify fixes differently.
+This criteria was too strict—it used vague words ('concrete,' 'clear') that meant different things to different evaluators. In Unit 4 eval runs, it rejected good PRs because different projects verify fixes differently.
 
 **My Fix (Unit 4):**
 ```markdown
@@ -94,7 +94,7 @@ All CI checks passed (lint, frontend, test-integration, test-unit, typecheck).
 
 ### Proof 4: What Landed Because of My Work
 
-1. **PR #86 was accepted and merged** — the fix is now live in the repository
+1. **[PR #86](https://github.com/codepath/pathreview-ai301-fa26-s3/pull/86) is open and ready to merge** — all 5 CI checks passed (frontend, lint, test-integration, test-unit, typecheck); no conflicts with base branch. The fix is tested and ready for production.
 2. **My evaluation framework achieved perfect agreement (20/20)** — all categories passed when grading contributions
 3. **The lessons traveled forward** — the principle "observable facts, not adjectives" applied across all four tools and became the foundation for success
 
